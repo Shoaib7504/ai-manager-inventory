@@ -114,8 +114,7 @@ const Login = () => {
 
   
                     <button
-                        type="button"
-                        
+                        type="button"                        
                         className="w-full bg-[#0f1729] border border-gray-700 hover:border-gray-600 text-white py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3"
                     >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
