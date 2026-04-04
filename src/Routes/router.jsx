@@ -8,6 +8,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoute from "../Context/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
+import ModelDetails from "../Pages/ModelDetails";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,13 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <AddModels></AddModels>
                 </PrivateRoute>
+            },
+            {
+                path: "/model-details/:id",
+                element: <PrivateRoute>
+                    <ModelDetails></ModelDetails>
+                </PrivateRoute>,
+                loader:({params})=>fetch( `http://localhost:3000/models/${params.id}`)
             }
         ]
 

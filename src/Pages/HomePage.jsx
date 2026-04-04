@@ -23,7 +23,7 @@ const HomePage = () => {
 
 
             <div className=' w-full px-5 py-5 '>
-                <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mt-7 gap-y-4">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-7 gap-y-4">
                     {sliceData.map(model => <ModelCard key={model._id} model={model} />)}
                 </div>
             </div>

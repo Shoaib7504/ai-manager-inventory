@@ -10,7 +10,7 @@ const Navbar = () => {
     const { user, Logout } = use(AuthContext);
 
     return (
-        <div className='p-5 flex justify-between items-center'>
+        <div className='p-5 flex justify-evenly items-center'>
             <div className='flex gap-10 text-xl font-semibold'>
                 <h1>Model Inventory</h1>
                 <NavLink to="/">Home</NavLink>

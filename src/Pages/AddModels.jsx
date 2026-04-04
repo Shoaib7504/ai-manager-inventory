@@ -1,7 +1,43 @@
 import { AlertCircle, ChevronRight, User } from 'lucide-react';
-import React from 'react';
+import React, { use } from 'react';
 import Image from '../assets/alexandra_koch-ai-7977960.jpg'
+import { AuthContext } from '../Context/AuthProvider';
+// import toast from 'react-hot-toast';
+
 const AddModels = () => {
+
+    const { user } = use(AuthContext)
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const formData = {
+            name: e.target.name.value,
+            framework: e.target.framework.value,
+            useCase: e.target.useCase.value,
+            dataset: e.target.dataset.value,
+            image: e.target.image.value,
+            description: e.target.description.value,
+            createBy: user.email,
+            createAt: new Date(),
+            purchased: '0'
+        }
+        // console.log(formData);
+        fetch('http://localhost:3000/models', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                // toast.success("Successfully added!")
+                console.log(data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }
     return (
         <div className="min-h-screen bg-[#F9FAFB] text-white">
 
@@ -47,8 +83,8 @@ const AddModels = () => {
 
                     {/* Right Column - Form */}
                     <div className="space-y-6">
-                        <form className="space-y-6">
-                            {/* onSubmit={handleSubmit} */}
+                        <form  onSubmit={handleSubmit} className="space-y-6">
+
                             {/* Model Name */}
                             <div className="flex-col gap-x-3">
                                 <label className="text-lg text-black font-medium  tracking-wider">
@@ -58,6 +94,7 @@ const AddModels = () => {
                                     id="modelName"
                                     type="text"
                                     placeholder="Ex. ChatGPT-4.0"
+                                    name='name'
                                     className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                 />
                             </div>
@@ -70,7 +107,9 @@ const AddModels = () => {
                                     </label>
                                 </div>
                                 <div>
-                                    <select defaultValue="Pick a Framework" className="select select-info w-full mt-1 py-3 rounded-xl
+                                    <select defaultValue="Pick a Framework"
+                                        name='framework'
+                                        className="select select-info w-full mt-1 py-3 rounded-xl
                                      bg-gray-300 ">
                                         <option disabled={true}>Pick a Framework</option>
                                         <option>React</option>
@@ -93,8 +132,7 @@ const AddModels = () => {
                                         id="useCase"
                                         type="text"
                                         placeholder="Define the operational intent..."
-                                        // value={primaryUseCase}
-                                        // onChange={(e) => setPrimaryUseCase(e.target.value)}
+                                        name='useCase'
                                         className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                     />
                                 </div>
@@ -112,8 +150,27 @@ const AddModels = () => {
                                     <input
                                         id="datasetUrl"
                                         type="text"
-                                        // value={datasetUrl}
-                                        // onChange={(e) => setDatasetUrl(e.target.value)}
+                                        name='dataset'
+                                        className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                    />
+                                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                                        <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <div>
+
+                                    <label className="text-lg text-black font-medium  tracking-wider">
+                                        Image URL
+                                    </label>
+                                </div>
+                                <div className="relative">
+                                    <input
+                                        id="datasetUrl"
+                                        type="text"
+                                        placeholder='Image Url'
+                                        name='image'
                                         className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                     />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -124,17 +181,16 @@ const AddModels = () => {
 
                             {/* Brief Description */}
                             <div className="space-y-2">
-                              
+
                                 <div>
                                     <label className="text-lg text-black font-medium  tracking-wider">
-                                    Brief Description
-                                </label>
+                                        Brief Description
+                                    </label>
                                 </div>
                                 <textarea
                                     id="description"
                                     placeholder="The story behind the intelligence..."
-                                    // value={briefDescription}
-                                    // onChange={(e) => setBriefDescription(e.target.value)}
+
                                     rows={4}
                                     className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                 />
@@ -158,7 +214,7 @@ const AddModels = () => {
                             {/* Timestamp Checkbox */}
                             <div className="flex items-center gap-3">
                                 <input type="checkbox" defaultChecked className="checkbox" />
-                               
+
                                 <label className="text-xs text-gray-400 uppercase tracking-wider">
                                     SYSTEM TIMESTAMP STAMP
                                 </label>
