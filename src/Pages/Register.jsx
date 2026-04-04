@@ -1,22 +1,39 @@
 import { Eye, EyeOff, ImageIcon, Lock, Mail, User } from 'lucide-react';
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { use, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { AuthContext } from '../Context/AuthProvider';
 
 const Register = () => {
-
+    const { createUser, setUser } = use(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = e.target;
+        const name = form.fullName.value;
+        const email = form.email.value;
+        const photoUrl = form.photoUrl.value;
+        const password = form.password.value;
+        console.log('Register', { name, email, photoUrl, password });
+        createUser(email, password)
+            .then((userCredential) => {
+                // Signed up 
+                const user = userCredential.user;
+                console.log(user);
+                setUser(user)
+                navigate("/")
 
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    const form=e.target;
-    const name=form.fullName.value;
-    const email=form.email.value;
-    const photoUrl=form.photoUrl.value;
-    const password=form.password.value;
-    console.log('Register',{name,email,photoUrl,password});
-    
-    
-  }
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                
+                alert(errorMessage)
+            });
+
+
+    }
 
     const currentYear = new Date().getFullYear();
     return (
@@ -35,8 +52,8 @@ const Register = () => {
                     </p>
                 </div>
 
-                <form  onSubmit={handleSubmit}  className="space-y-4">
-                   
+                <form onSubmit={handleSubmit} className="space-y-4">
+
                     {/* Full Name */}
                     <div>
                         <label htmlFor="fullName" className="block text-gray-500 text-sm mb-2">

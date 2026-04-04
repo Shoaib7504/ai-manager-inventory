@@ -1,16 +1,36 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
-import { Link, Links } from 'react-router';
+import { Link, Links, useLocation, useNavigate } from 'react-router';
+import { AuthContext } from '../Context/AuthProvider';
+
 const Login = () => {
+    const { LogIn } = AuthContext
     const [showPassword, setShowPassword] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate()
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle login logic here
-       
-        const form=e.target
-        const email=form.email.value;
-        const password=form.password.value;
-        console.log("Login submitted" ,{email, password});
+
+        const form = e.target
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log("Login submitted", { email, password });
+
+        LogIn(email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+                console.log(user);
+                navigate(`${location.state ? location.state : "/"}`)
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                alert(errorMessage)
+            });
     };
 
     return (
@@ -23,8 +43,8 @@ const Login = () => {
                 <h1 className='font-bold text-5xl text-teal-600 mt-3'>AI Model Inventory </h1>
                 <h1 className=' font-bold text-5xl mt-3 bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent'>Manager</h1>
                 <p className='mt-3 text-gray-400'>Access the central hub for the synthetic observer <br />
-                ecosystem.Manage,curate,and deploy your neural <br />
-                assets from a single secure terminal</p>
+                    ecosystem.Manage,curate,and deploy your neural <br />
+                    assets from a single secure terminal</p>
             </div>
             <div className="w-125 mx-auto justify-center items-center">
                 <div className=" rounded-2xl p-10 shadow-2xl ">
@@ -100,7 +120,7 @@ const Login = () => {
                         </button>
                     </form>
 
-             
+
                     <div className="relative my-8">
                         <div className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-gray-700"></div>
@@ -112,9 +132,9 @@ const Login = () => {
                         </div>
                     </div>
 
-  
+
                     <button
-                        type="button"                        
+                        type="button"
                         className="w-full bg-[#0f1729] border border-gray-700 hover:border-gray-600 text-white py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3"
                     >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
