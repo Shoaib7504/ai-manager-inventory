@@ -166,7 +166,7 @@ const Register = () => {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-gray-900 py-3 rounded-lg font-medium transition-colors mt-6"
+                        className="w-full cursor-pointer bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-gray-900 py-3 rounded-lg font-medium transition-colors mt-6"
                     >
                         CREATE ACCOUNT
                     </button>

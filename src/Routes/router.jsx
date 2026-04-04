@@ -16,11 +16,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                Component: HomePage
+                Component: HomePage,
+                loader: () => fetch('http://localhost:3000/models')
             },
             {
                 path: "/all-models",
-                Component: AllModels
+                Component: AllModels,
+                loader: () => fetch('http://localhost:3000/models')
             },
             {
                 path: "/add-models",

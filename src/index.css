@@ -11,9 +11,10 @@
   border: 2px solid transparent;
   border-radius: 16px;
   background: linear-gradient(#fbfbfc, #f3f3f5) padding-box,
-              linear-gradient(to right, cyan, purple) border-box;
+    linear-gradient(to right, cyan, purple) border-box;
 }
 
-a.active{
+
+a.active {
   @apply text-[#22D3EE] underline decoration-[#22D3EE]
 }

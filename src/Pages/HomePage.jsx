@@ -2,22 +2,17 @@ import React from 'react';
 import Banner from '../components/Banner';
 import Image from '../assets/ChatGPT Image Apr 4, 2026, 10_17_20 AM.png'
 import { FaRegCheckCircle } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import ModelCard from '../components/ModelCard';
 const HomePage = () => {
+    const jsonData = useLoaderData()
+    const sliceData = jsonData.slice(0, 8);
+    console.log(sliceData);
 
-    const data = {
-        name: "BERT",
-        framework: "TensorFlow",
-        useCase: "NLP",
-        dataset: "Wikipedia",
-        description:
-            "A transformer-based model for natural language processing tasks like text classification.",
-        image: "https://cdn.pixabay.com/photo/2023/01/09/13/34/chatgpt-7707442_1280.jpg", // replace with your real image
-        createdBy: "user@example.com",
-        createdAt: "2025-10-28T11:54:00.000Z",
-        purchased: 10,
-    };
+
+
+   
     return (
         <div className='w-11/12 mx-auto'>
             <Banner></Banner>
@@ -25,6 +20,13 @@ const HomePage = () => {
             <h1 className='font-semibold text-4xl mt-9 px-10'>Featured
                 <span className='bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent'> Inventory</span></h1>
             <p className='px-10 text-gray-400 mt-2'>Top performing neural assets currently active in the cluster.</p>
+
+
+            <div className=' w-full px-5 py-5 '>
+                <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mt-7 gap-y-4">
+                    {sliceData.map(model => <ModelCard key={model._id} model={model} />)}
+                </div>
+            </div>
 
 
             <div className='flex gap-4 justify-center mt-20'>
@@ -86,58 +88,7 @@ const HomePage = () => {
             </div>
 
 
-            <div className="w-[340px] gradient-border  overflow-hidden  text-white shadow-lg border border-cyan-500/20">
-
-                {/* Top Image */}
-                <div className="relative">
-                    <img
-                        src={data.image}
-                        alt={data.name}
-                        className="w-full h-[180px] border-2 border-red-500 object-cover"
-                    />
-                    <span className="absolute top-3 right-3 text-xs bg-cyan-500/50 text-cyan-600 px-2 py-1 rounded-md">
-                        ACTIVE
-                    </span>
-                </div>
-
-                {/* Content */}
-                <div className="p-4 space-y-3">
-
-                    <p className="text-ls text-gray-600 uppercase tracking-widest">
-                        Transformer Model
-                    </p>
-
-                    <h2 className="text-xl text-black font-semibold">{data.name}</h2>
-
-                    <p className="text-sm text-gray-400">
-                        {data.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2 text-xs">
-                        <span className="bg-gray-700 px-2 py-1 rounded">
-                            {data.framework}
-                        </span>
-                        <span className="bg-gray-700 px-2 py-1 rounded">
-                            {data.useCase}
-                        </span>
-                        <span className="bg-gray-700 px-2 py-1 rounded">
-                            {data.dataset}
-                        </span>
-                    </div>
-
-                    {/* Footer */}
-                    <div className="flex justify-between items-center pt-3">
-                        <span className="text-ls text-gray-500">
-                            Purchases: {data.purchased}
-                        </span>
-
-                        <button className="p-2 rounded-lg bg-gray-700 hover:bg-gray-700 transition">
-                           <AiFillExclamationCircle  size={16} />
-                        </button>
-                    </div>
-                </div>
-            </div>
+           
 
         </div>
     );
