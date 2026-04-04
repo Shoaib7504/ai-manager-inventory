@@ -6,41 +6,49 @@ import HomePage from "../Pages/HomePage";
 import AuthLayout from "../Layout/AuthLayout";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoute from "../Context/PrivateRoute";
+import ErrorPage from "../Pages/ErrorPage";
 
-const router=createBrowserRouter([
+const router = createBrowserRouter([
     {
-        path:'/',
-        Component:MainLayout,
-        children:[
+        path: '/',
+        Component: MainLayout,
+        children: [
             {
-                path:"/",
-                Component:HomePage
+                path: "/",
+                Component: HomePage
             },
             {
-                path:"/all-models",
-                Component:AllModels
+                path: "/all-models",
+                Component: AllModels
             },
             {
-                path:"/add-models",
-                Component:AddModels
+                path: "/add-models",
+                element: <PrivateRoute>
+                    <AddModels></AddModels>
+                </PrivateRoute>
             }
         ]
-        
+
     }
     ,
     {
-        path:'/auth',
+        path: '/auth',
         Component: AuthLayout,
-        children:[
+        children: [
             {
-                path:'/auth/login',
-                Component:Login
+                path: '/auth/login',
+                Component: Login
             },
             {
                 path: "/auth/register",
-                Component:Register
+                Component: Register
             }
         ]
+    },
+    {
+        path: '/*',
+        element: <ErrorPage></ErrorPage>
     }
 ])
 

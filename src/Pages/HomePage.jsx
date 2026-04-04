@@ -3,6 +3,7 @@ import Banner from '../components/Banner';
 import Image from '../assets/ChatGPT Image Apr 4, 2026, 10_17_20 AM.png'
 import { FaRegCheckCircle } from 'react-icons/fa';
 import { Link } from 'react-router';
+import { AiFillExclamationCircle } from 'react-icons/ai';
 const HomePage = () => {
 
     const data = {
@@ -12,7 +13,7 @@ const HomePage = () => {
         dataset: "Wikipedia",
         description:
             "A transformer-based model for natural language processing tasks like text classification.",
-        image: "https://via.placeholder.com/600x300", // replace with your real image
+        image: "https://cdn.pixabay.com/photo/2023/01/09/13/34/chatgpt-7707442_1280.jpg", // replace with your real image
         createdBy: "user@example.com",
         createdAt: "2025-10-28T11:54:00.000Z",
         purchased: 10,
@@ -85,16 +86,16 @@ const HomePage = () => {
             </div>
 
 
-            <div className="w-[340px] rounded-2xl overflow-hidden bg-[#0f172a] text-white shadow-lg border border-cyan-500/20">
+            <div className="w-[340px] gradient-border  overflow-hidden  text-white shadow-lg border border-cyan-500/20">
 
                 {/* Top Image */}
                 <div className="relative">
                     <img
                         src={data.image}
                         alt={data.name}
-                        className="w-full h-[180px] object-cover"
+                        className="w-full h-[180px] border-2 border-red-500 object-cover"
                     />
-                    <span className="absolute top-3 right-3 text-xs bg-cyan-500/20 text-cyan-300 px-2 py-1 rounded-md">
+                    <span className="absolute top-3 right-3 text-xs bg-cyan-500/50 text-cyan-600 px-2 py-1 rounded-md">
                         ACTIVE
                     </span>
                 </div>
@@ -102,11 +103,11 @@ const HomePage = () => {
                 {/* Content */}
                 <div className="p-4 space-y-3">
 
-                    <p className="text-xs text-gray-400 uppercase tracking-widest">
+                    <p className="text-ls text-gray-600 uppercase tracking-widest">
                         Transformer Model
                     </p>
 
-                    <h2 className="text-xl font-semibold">{data.name}</h2>
+                    <h2 className="text-xl text-black font-semibold">{data.name}</h2>
 
                     <p className="text-sm text-gray-400">
                         {data.description}
@@ -114,25 +115,25 @@ const HomePage = () => {
 
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 text-xs">
-                        <span className="bg-gray-800 px-2 py-1 rounded">
+                        <span className="bg-gray-700 px-2 py-1 rounded">
                             {data.framework}
                         </span>
-                        <span className="bg-gray-800 px-2 py-1 rounded">
+                        <span className="bg-gray-700 px-2 py-1 rounded">
                             {data.useCase}
                         </span>
-                        <span className="bg-gray-800 px-2 py-1 rounded">
+                        <span className="bg-gray-700 px-2 py-1 rounded">
                             {data.dataset}
                         </span>
                     </div>
 
                     {/* Footer */}
                     <div className="flex justify-between items-center pt-3">
-                        <span className="text-xs text-gray-500">
+                        <span className="text-ls text-gray-500">
                             Purchases: {data.purchased}
                         </span>
 
-                        <button className="p-2 rounded-lg bg-gray-800 hover:bg-gray-700 transition">
-                            <Download size={16} />
+                        <button className="p-2 rounded-lg bg-gray-700 hover:bg-gray-700 transition">
+                           <AiFillExclamationCircle  size={16} />
                         </button>
                     </div>
                 </div>

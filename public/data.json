@@ -1,0 +1,101 @@
+[
+  {
+    "name": "BERT",
+    "framework": "TensorFlow",
+    "useCase": "NLP",
+    "dataset": "Wikipedia",
+    "description": "A transformer-based model for natural language processing tasks like text classification.",
+    "image": "https://cdn.pixabay.com/photo/2023/01/09/13/34/chatgpt-7707442_1280.jpg",
+    "createdBy": "user@example.com",
+    "createdAt": "2025-10-28T11:54:00.000Z",
+    "purchased": 10
+  },
+  {
+    "name": "GPT-2",
+    "framework": "PyTorch",
+    "useCase": "Text Generation",
+    "dataset": "WebText",
+    "description": "A generative language model capable of producing coherent paragraphs of text.",
+    "image": "https://cdn.pixabay.com/photo/2023/10/30/05/02/ai-generated-8351759_1280.png",
+    "createdBy": "user2@example.com",
+    "createdAt": "2025-09-15T10:20:00.000Z",
+    "purchased": 25
+  },
+  {
+    "name": "ResNet-50",
+    "framework": "PyTorch",
+    "useCase": "Image Classification",
+    "dataset": "ImageNet",
+    "description": "A deep residual network used for image recognition and classification tasks.",
+    "image": "https://cdn.pixabay.com/photo/2023/10/29/10/27/ai-generated-8349460_1280.png",
+    "createdBy": "user3@example.com",
+    "createdAt": "2025-08-10T08:30:00.000Z",
+    "purchased": 18
+  },
+  {
+    "name": "YOLOv5",
+    "framework": "PyTorch",
+    "useCase": "Object Detection",
+    "dataset": "COCO",
+    "description": "A real-time object detection model known for speed and accuracy.",
+    "image": "https://cdn.pixabay.com/photo/2023/05/08/08/41/ai-7977962_1280.png",
+    "createdBy": "user4@example.com",
+    "createdAt": "2025-07-05T12:00:00.000Z",
+    "purchased": 30
+  },
+  {
+    "name": "T5",
+    "framework": "TensorFlow",
+    "useCase": "Text-to-Text",
+    "dataset": "C4",
+    "description": "A unified text-to-text transformer model for multiple NLP tasks.",
+    "image": "https://cdn.pixabay.com/photo/2023/03/21/18/25/chatgpt-7867916_1280.jpg",
+    "createdBy": "user5@example.com",
+    "createdAt": "2025-06-18T14:45:00.000Z",
+    "purchased": 22
+  },
+  {
+    "name": "EfficientNet",
+    "framework": "TensorFlow",
+    "useCase": "Image Classification",
+    "dataset": "ImageNet",
+    "description": "A highly efficient CNN architecture balancing accuracy and performance.",
+    "image": "https://cdn.pixabay.com/photo/2024/03/09/17/17/robot-8623002_1280.jpg",
+    "createdBy": "user6@example.com",
+    "createdAt": "2025-05-12T09:15:00.000Z",
+    "purchased": 16
+  },
+  {
+    "name": "StyleGAN",
+    "framework": "PyTorch",
+    "useCase": "Image Generation",
+    "dataset": "FFHQ",
+    "description": "A GAN model capable of generating high-quality realistic human faces.",
+    "image": "https://cdn.pixabay.com/photo/2023/04/05/19/42/chatgpt-7902213_1280.jpg",
+    "createdBy": "user7@example.com",
+    "createdAt": "2025-04-20T11:10:00.000Z",
+    "purchased": 12
+  },
+  {
+    "name": "Whisper",
+    "framework": "PyTorch",
+    "useCase": "Speech Recognition",
+    "dataset": "Multilingual Audio",
+    "description": "A robust speech-to-text model supporting multiple languages.",
+    "image": "https://cdn.pixabay.com/photo/2024/05/19/18/50/ai-generated-8773154_1280.png",
+    "createdBy": "user8@example.com",
+    "createdAt": "2025-03-08T16:25:00.000Z",
+    "purchased": 28
+  },
+  {
+    "name": "Stable Diffusion",
+    "framework": "PyTorch",
+    "useCase": "Image Generation",
+    "dataset": "LAION-5B",
+    "description": "A latent diffusion model for generating high-quality images from text prompts.",
+    "image": "https://cdn.pixabay.com/photo/2024/05/19/18/50/ai-generated-8773155_1280.png",
+    "createdBy": "user9@example.com",
+    "createdAt": "2025-02-14T13:40:00.000Z",
+    "purchased": 35
+  }
+]
