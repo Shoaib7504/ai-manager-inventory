@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
-import { Link, Links, useLocation, useNavigate } from 'react-router';
+import { Link,  useLocation, useNavigate } from 'react-router';
 import { AuthContext } from '../Context/AuthProvider';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    const { LogIn } = AuthContext
+    const { LogIn, LoginWithGoogle, setUser } = use(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
     const location = useLocation();
     const navigate = useNavigate()
@@ -32,6 +33,33 @@ const Login = () => {
                 alert(errorMessage)
             });
     };
+
+
+    const handleGoogleLogin = () => {
+        LoginWithGoogle()
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                console.log(token);
+
+                const user = result.user;
+                setUser(user)
+                navigate("/")
+
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+                console.log({ errorCode, errorMessage, email, credential });
+
+            });
+    }
 
     return (
 
@@ -135,7 +163,8 @@ const Login = () => {
 
                     <button
                         type="button"
-                        className="w-full bg-[#0f1729] border border-gray-700 hover:border-gray-600 text-white py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3"
+                        onClick={handleGoogleLogin}
+                        className="w-full bg-[#0f1729] cursor-pointer border border-gray-700 hover:border-gray-600 text-white py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3"
                     >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                             <path
