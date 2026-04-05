@@ -1,5 +1,6 @@
 import React from 'react';
 import { AiFillExclamationCircle } from 'react-icons/ai';
+import { Link } from 'react-router';
 
 const ModelCard = ({ model }) => {
     // console.log(model);
@@ -67,9 +68,9 @@ const ModelCard = ({ model }) => {
                         Purchases: {model.purchased}
                     </span>
 
-                    <button className="p-2 rounded-lg bg-gray-700 hover:bg-gray-700 transition">
-                        <AiFillExclamationCircle size={12} />
-                    </button>
+                    <Link to={`/model-details/${model._id}`} className="p-2 rounded-lg bg-gray-700 hover:bg-gray-700 transition">
+                            <AiFillExclamationCircle size={12} />
+                        </Link>
                 </div>
             </div>
         </div> 

@@ -2,7 +2,7 @@ import { AlertCircle, ChevronRight, User } from 'lucide-react';
 import React, { use } from 'react';
 import Image from '../assets/alexandra_koch-ai-7977960.jpg'
 import { AuthContext } from '../Context/AuthProvider';
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const AddModels = () => {
 
@@ -30,7 +30,7 @@ const AddModels = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // toast.success("Successfully added!")
+                toast.success("Successfully added!")
                 console.log(data)
             })
             .catch(err => {
