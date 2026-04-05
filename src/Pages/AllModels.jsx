@@ -4,7 +4,7 @@ import AllModelCard from '../components/AllModelCard';
 
 const AllModels = () => {
     const data = useLoaderData()
-    console.log(data);
+    // console.log(data);
 
     return (
         <div className='w-11/12 mx-auto'>

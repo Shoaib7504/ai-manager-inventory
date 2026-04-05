@@ -1,12 +1,30 @@
-import React from 'react';
-import { Link, Navigate, useLoaderData, useNavigate } from 'react-router';
+import React, { use, useEffect, useState } from 'react';
+import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Context/AuthProvider';
 
 const ModelDetails = () => {
+    const { user } = use(AuthContext)
+    const [model, setModel] = useState({});
+    const [loading, setLoading] = useState(true);
+    const Navigate = useNavigate()
+    const { id } = useParams()
 
-    const data = useLoaderData()
-    const model = data.result
-const Navigate=useNavigate()
+    useEffect(() => {
+        fetch(`http://localhost:3000/models/${id}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`,
+            },
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                setModel(data.result);
+                console.log(" Api called!")
+                console.log(data);
+                setLoading(false);
+            });
+    }, []);
+
 
     const handleDelete = () => {
         Swal.fire({
@@ -42,6 +60,10 @@ const Navigate=useNavigate()
             }
         });
     };
+
+if(loading){
+    return <div className="">Loading</div>
+}
 
     return (
         <div>
@@ -79,19 +101,21 @@ const Navigate=useNavigate()
                             <div className="flex gap-3 mt-6">
                                 <Link
                                     to={`/update-model/${model._id}`}
-                                    className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"
+                                    className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
+                                     text-white border-0 hover:from-pink-600 hover:to-red-700"
                                 >
                                     Update Model
                                 </Link>
                                 <button
                                     // onClick={handleDownload}
-                                    className="btn btn-secondary rounded-full"
+                                    className="btn bg-linear-to-r from-[#14B8A6] to-[#6366F1] rounded-full"
                                 >
                                     Download
                                 </button>
                                 <button
                                     onClick={handleDelete}
-                                    className="btn btn-outline rounded-full border-gray-300 hover:border-pink-500 hover:text-pink-600"
+                                    className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
+                                     text-white border-0 hover:from-pink-600 hover:to-red-700"
                                 >
                                     Delete
                                 </button>

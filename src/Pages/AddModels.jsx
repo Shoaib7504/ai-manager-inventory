@@ -3,9 +3,10 @@ import React, { use } from 'react';
 import Image from '../assets/alexandra_koch-ai-7977960.jpg'
 import { AuthContext } from '../Context/AuthProvider';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const AddModels = () => {
-
+const Navigate=useNavigate
     const { user } = use(AuthContext)
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -32,6 +33,7 @@ const AddModels = () => {
             .then(data => {
                 toast.success("Successfully added!")
                 console.log(data)
+              Navigate("/all-models")
             })
             .catch(err => {
                 console.log(err)
@@ -95,6 +97,7 @@ const AddModels = () => {
                                     type="text"
                                     placeholder="Ex. ChatGPT-4.0"
                                     name='name'
+                                    required
                                     className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                 />
                             </div>
@@ -109,6 +112,7 @@ const AddModels = () => {
                                 <div>
                                     <select defaultValue="Pick a Framework"
                                         name='framework'
+                                        required
                                         className="select select-info w-full mt-1 py-3 rounded-xl
                                      bg-gray-300 ">
                                         <option disabled={true}>Pick a Framework</option>
@@ -133,6 +137,7 @@ const AddModels = () => {
                                         type="text"
                                         placeholder="Define the operational intent..."
                                         name='useCase'
+                                        required
                                         className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                     />
                                 </div>
@@ -151,6 +156,7 @@ const AddModels = () => {
                                         id="datasetUrl"
                                         type="text"
                                         name='dataset'
+                                        required
                                         className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                     />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -171,6 +177,7 @@ const AddModels = () => {
                                         type="text"
                                         placeholder='Image Url'
                                         name='image'
+                                        required
                                         className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                     />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -190,7 +197,7 @@ const AddModels = () => {
                                 <textarea
                                     id="description"
                                     placeholder="The story behind the intelligence..."
-
+                                      required
                                     rows={4}
                                     className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                 />

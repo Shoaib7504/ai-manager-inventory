@@ -10,6 +10,7 @@ import PrivateRoute from "../Context/PrivateRoute";
 import ErrorPage from "../Pages/ErrorPage";
 import ModelDetails from "../Pages/ModelDetails";
 import UpdateModel from "../Pages/UpdateModel";
+import MyModels from "../Pages/MyModels";
 
 const router = createBrowserRouter([
     {
@@ -33,11 +34,17 @@ const router = createBrowserRouter([
                 </PrivateRoute>
             },
             {
+                path: "/my-models",
+                element: <PrivateRoute>
+                    <MyModels></MyModels>
+                </PrivateRoute>
+            },
+            {
                 path: "/model-details/:id",
                 element: <PrivateRoute>
                     <ModelDetails></ModelDetails>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/models/${params.id}`)
+
             },
             {
                 path: "/update-model/:id",

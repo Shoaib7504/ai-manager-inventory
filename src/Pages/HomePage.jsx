@@ -8,7 +8,7 @@ import ModelCard from '../components/ModelCard';
 const HomePage = () => {
     const jsonData = useLoaderData()
     const sliceData = jsonData.slice(0, 8);
-    console.log(sliceData);
+    // console.log(sliceData);
 
 
 
