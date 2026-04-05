@@ -11,6 +11,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import ModelDetails from "../Pages/ModelDetails";
 import UpdateModel from "../Pages/UpdateModel";
 import MyModels from "../Pages/MyModels";
+import MyDownloadPage from "../Pages/MyDownloadPage";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,12 @@ const router = createBrowserRouter([
                     <UpdateModel></UpdateModel>
                 </PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:3000/models/${params.id}`)
+            },
+            {
+                path:"/my-downloads",
+                element:<PrivateRoute>
+                    <MyDownloadPage></MyDownloadPage>
+                </PrivateRoute>
             }
         ]
 

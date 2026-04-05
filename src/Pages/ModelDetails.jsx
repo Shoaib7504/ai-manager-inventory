@@ -2,6 +2,7 @@ import React, { use, useEffect, useState } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const ModelDetails = () => {
     const { user } = use(AuthContext)
@@ -61,9 +62,27 @@ const ModelDetails = () => {
         });
     };
 
-if(loading){
-    return <div className="">Loading</div>
-}
+    const handleDownload = () => {
+        fetch(`http://localhost:3000/downloads`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({...model,downloadedBy:user.email})
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+               toast.success("Download Successfully")
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    if (loading) {
+        return <div className="">Loading</div>
+    }
 
     return (
         <div>
@@ -107,7 +126,7 @@ if(loading){
                                     Update Model
                                 </Link>
                                 <button
-                                    // onClick={handleDownload}
+                                    onClick={handleDownload}
                                     className="btn bg-linear-to-r from-[#14B8A6] to-[#6366F1] rounded-full"
                                 >
                                     Download
