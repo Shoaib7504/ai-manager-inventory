@@ -21,12 +21,12 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 Component: HomePage,
-                loader: () => fetch('http://localhost:3000/models')
+                loader: () => fetch('https://ai-inventory-manager-lovat.vercel.app/models')
             },
             {
                 path: "/all-models",
                 Component: AllModels,
-                loader: () => fetch('http://localhost:3000/models')
+                loader: () => fetch('https://ai-inventory-manager-lovat.vercel.app/models')
             },
             {
                 path: "/add-models",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <UpdateModel></UpdateModel>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:3000/models/${params.id}`)
+                loader: ({ params }) => fetch(`https://ai-inventory-manager-lovat.vercel.app/models/${params.id}`)
             },
             {
                 path:"/my-downloads",

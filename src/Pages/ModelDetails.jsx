@@ -12,7 +12,7 @@ const ModelDetails = () => {
     const { id } = useParams()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/models/${id}`, {
+        fetch(`https://ai-inventory-manager-lovat.vercel.app/models/${id}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },
@@ -38,7 +38,7 @@ const ModelDetails = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/models/${model._id}`, {
+                fetch(`https://ai-inventory-manager-lovat.vercel.app/models/${model._id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ const ModelDetails = () => {
     };
 
     const handleDownload = () => {
-        fetch(`http://localhost:3000/downloads`, {
+        fetch(`https://ai-inventory-manager-lovat.vercel.app/downloads`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

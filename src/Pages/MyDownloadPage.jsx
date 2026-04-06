@@ -9,7 +9,7 @@ const MyDownloadPage = () => {
     useEffect(() => {
         if (!user?.email) return;
 
-        fetch(`http://localhost:3000/my-downloads?email=${user.email}`, {
+        fetch(`https://ai-inventory-manager-lovat.vercel.app/my-downloads?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },

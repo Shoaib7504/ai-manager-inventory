@@ -19,7 +19,7 @@ const UpdateModel = () => {
             description: e.target.description.value,           
         }
         // console.log(formData);
-        fetch( `http://localhost:3000/models/${model._id}` , {
+        fetch( `https://ai-inventory-manager-lovat.vercel.app/models/${model._id}` , {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

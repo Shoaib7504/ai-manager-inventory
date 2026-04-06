@@ -7,7 +7,7 @@ const MyModels = () => {
     const [models, setModels] = useState({})
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        fetch(`http://localhost:3000/my-models?emai= ${user.email}`,
+        fetch(`https://ai-inventory-manager-lovat.vercel.app/my-models?emai= ${user.email}`,
             {
                 headers: {
                     authorization: `Bearer ${user.accessToken}`,
