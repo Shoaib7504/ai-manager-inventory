@@ -22,7 +22,7 @@ const Navigate=useNavigate
             purchased: '0'
         }
         // console.log(formData);
-        fetch('https://ai-inventory-manager-lovat.vercel.app/models', {
+        fetch('https://ai-inventory-server-4.onrender.com/models', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -38,7 +38,7 @@ const ModelDetails = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://ai-inventory-manager-lovat.vercel.app/models/${model._id}`, {
+                fetch(`https://ai-inventory-server-4.onrender.com/models/${model._id}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",

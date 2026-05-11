@@ -7,13 +7,11 @@ const MyModels = () => {
     const [models, setModels] = useState({})
     const [loading, setLoading] = useState(true)
     useEffect(() => {
-        fetch(`https://ai-inventory-manager-lovat.vercel.app/my-models?emai= ${user.email}`,
-            {
-                headers: {
-                    authorization: `Bearer ${user.accessToken}`,
-                },
-            }
-        )
+        fetch(`https://ai-inventory-server-4.onrender.com/my-models?email=${user.email}`, {
+            headers: {
+                authorization: `Bearer ${user.accessToken}`,
+            },
+        })
             .then(res => res.json())
             .then(data => {
                 setLoading(false)
