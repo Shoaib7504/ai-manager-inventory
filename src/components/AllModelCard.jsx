@@ -3,7 +3,7 @@ import { AiFillExclamationCircle } from 'react-icons/ai';
 import { Link } from 'react-router';
 
 const AllModelCard = ({ result }) => {
-    console.log(result);
+    // console.log(result);
 
     return (
         <div>

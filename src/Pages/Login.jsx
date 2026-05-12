@@ -16,7 +16,7 @@ const Login = () => {
         const form = e.target
         const email = form.email.value;
         const password = form.password.value;
-        console.log("Login submitted", { email, password });
+        // console.log("Login submitted", { email, password });
 
         LogIn(email, password)
             .then((userCredential) => {

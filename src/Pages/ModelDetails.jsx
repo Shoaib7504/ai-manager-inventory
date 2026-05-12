@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react';
-import { Link, Navigate, useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthProvider';
 import toast from 'react-hot-toast';
@@ -8,23 +8,39 @@ const ModelDetails = () => {
     const { user } = use(AuthContext)
     const [model, setModel] = useState({});
     const [loading, setLoading] = useState(true);
-    const Navigate = useNavigate()
+    const navigate = useNavigate()
     const { id } = useParams()
 
-    useEffect(() => {
-        fetch(`https://ai-inventory-manager-lovat.vercel.app/models/${id}`, {
-            headers: {
-                authorization: `Bearer ${user.accessToken}`,
-            },
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                setModel(data.result);
-                console.log(" Api called!")
-                console.log(data);
-                setLoading(false);
-            });
-    }, []);
+   useEffect(() => {
+    const fetchModel = async () => {
+        try {
+            const token = await user.getIdToken(true) 
+            const res = await fetch(
+                `https://ai-inventory-server-4.onrender.com/models/${id}`,
+                {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                }
+            )
+            const data = await res.json()
+
+            if (!res.ok) {
+                console.error("Server error:", data.message)
+                setLoading(false)
+                return
+            }
+
+            setModel(data.result)
+            setLoading(false)
+        } catch (err) {
+            console.error("Fetch failed:", err)
+            setLoading(false)
+        }
+    }
+
+    fetchModel()
+}, [id])
 
 
     const handleDelete = () => {
@@ -47,7 +63,7 @@ const ModelDetails = () => {
                     .then((res) => res.json())
                     .then((data) => {
                         console.log(data);
-                        Navigate("/all-models");
+                        navigate("/all-models");
 
                         Swal.fire({
                             title: "Deleted!",
@@ -63,7 +79,7 @@ const ModelDetails = () => {
     };
 
     const handleDownload = () => {
-        fetch(`https://ai-inventory-manager-lovat.vercel.app/downloads`, {
+        fetch(`https://ai-inventory-server-4.onrender.com/downloads`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

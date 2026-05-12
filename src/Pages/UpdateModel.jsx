@@ -30,11 +30,11 @@ const UpdateModel = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    toast.success("Model updated successfully!"); // ✅ Fixed: was "Successfully added!"
+                    toast.success("Model updated successfully!"); 
                 } else {
                     toast.error("Update failed. Please try again.");
                 }
-                console.log(data);
+                // console.log(data);
             })
             .catch(err => {
                 toast.error("Something went wrong!");
@@ -76,7 +76,7 @@ const UpdateModel = () => {
                         <div>
                             <select
                                 name='framework'
-                                defaultValue={model.framework} // ✅ Fixed: was hardcoded "Pick a Framework"
+                                defaultValue={model.framework} 
                                 className="select select-info w-full mt-1 py-3 rounded-xl bg-gray-300"
                             >
                                 <option disabled value="">Pick a Framework</option>

@@ -4,12 +4,14 @@ import Image from '../assets/alexandra_koch-ai-7977960.jpg'
 import { AuthContext } from '../Context/AuthProvider';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
-
 const AddModels = () => {
-const Navigate=useNavigate
+    const navigate = useNavigate()
     const { user } = use(AuthContext)
-    const handleSubmit = (e) => {
-        e.preventDefault()
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+        const token = await user.getIdToken(true) 
+
         const formData = {
             name: e.target.name.value,
             framework: e.target.framework.value,
@@ -17,29 +19,36 @@ const Navigate=useNavigate
             dataset: e.target.dataset.value,
             image: e.target.image.value,
             description: e.target.description.value,
-            createBy: user.email,
-            createAt: new Date(),
+            createdBy: user.email,
+            createdAt: new Date(),
             purchased: '0'
         }
-        // console.log(formData);
-        fetch('https://ai-inventory-server-4.onrender.com/models', {
+        const res = await fetch('https://ai-inventory-server-4.onrender.com/models', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
             },
             body: JSON.stringify(formData)
         })
-            .then(res => res.json())
-            .then(data => {
-                toast.success("Successfully added!")
-                console.log(data)
-              Navigate("/all-models")
-            })
-            .catch(err => {
-                console.log(err)
-            })
 
+        // console.log("9. Response status:", res.status)
+        const data = await res.json()
+        // console.log("10. Response data:", data)
+
+        if (!res.ok) {
+            toast.error(data.message || "Failed!")
+            return
+        }
+
+        toast.success("Successfully added!")
+        navigate("/all-models")
+
+    } catch (err) {
+        console.error("ERROR:", err)
+        toast.error("Error: " + err.message)
     }
+}
     return (
         <div className="min-h-screen bg-[#F9FAFB] text-white">
 
@@ -85,7 +94,7 @@ const Navigate=useNavigate
 
                     {/* Right Column - Form */}
                     <div className="space-y-6">
-                        <form  onSubmit={handleSubmit} className="space-y-6">
+                        <form onSubmit={handleSubmit} className="space-y-6">
 
                             {/* Model Name */}
                             <div className="flex-col gap-x-3">
@@ -197,7 +206,7 @@ const Navigate=useNavigate
                                 <textarea
                                     id="description"
                                     placeholder="The story behind the intelligence..."
-                                      required
+                                    required
                                     rows={4}
                                     className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
                                 />
