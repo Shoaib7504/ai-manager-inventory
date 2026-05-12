@@ -4,44 +4,42 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthProvider';
 import toast from 'react-hot-toast';
 
+const BASE_URL = "https://ai-inventory-server-4.onrender.com";
+
 const ModelDetails = () => {
-    const { user } = use(AuthContext)
+    const { user } = use(AuthContext);
     const [model, setModel] = useState({});
     const [loading, setLoading] = useState(true);
-    const navigate = useNavigate()
-    const { id } = useParams()
+    const navigate = useNavigate();
+    const { id } = useParams();
 
-   useEffect(() => {
-    const fetchModel = async () => {
-        try {
-            const token = await user.getIdToken(true) 
-            const res = await fetch(
-                `https://ai-inventory-server-4.onrender.com/models/${id}`,
-                {
+    useEffect(() => {
+        const fetchModel = async () => {
+            try {
+                const token = await user.getIdToken(true);
+                const res = await fetch(`${BASE_URL}/models/${id}`, {
                     headers: {
                         authorization: `Bearer ${token}`,
                     },
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    console.error("Server error:", data.message);
+                    setLoading(false);
+                    return;
                 }
-            )
-            const data = await res.json()
 
-            if (!res.ok) {
-                console.error("Server error:", data.message)
-                setLoading(false)
-                return
+                setModel(data.result);
+                setLoading(false);
+            } catch (err) {
+                console.error("Fetch failed:", err);
+                setLoading(false);
             }
+        };
 
-            setModel(data.result)
-            setLoading(false)
-        } catch (err) {
-            console.error("Fetch failed:", err)
-            setLoading(false)
-        }
-    }
-
-    fetchModel()
-}, [id])
-
+        fetchModel();
+    }, [id]);
 
     const handleDelete = () => {
         Swal.fire({
@@ -52,64 +50,85 @@ const ModelDetails = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
-        }).then((result) => {
+        }).then(async (result) => {        
             if (result.isConfirmed) {
-                fetch(`https://ai-inventory-server-4.onrender.com/models/${model._id}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        console.log(data);
-                        navigate("/all-models");
+                try {
+                    const token = await user.getIdToken(true); 
 
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success",
-                        });
-                    })
-                    .catch((err) => {
-                        console.log(err);
+                    const res = await fetch(`${BASE_URL}/models/${model._id}`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`,  
+                        },
                     });
+
+                    const data = await res.json();
+
+                    if (!res.ok) {
+                        toast.error(data.message || "Delete failed!");
+                        return;
+                    }
+
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success",
+                    });
+                    navigate("/all-models");
+
+                } catch (err) {
+                    toast.error("Delete failed!");
+                    console.error(err);
+                }
             }
         });
     };
 
-    const handleDownload = () => {
-        fetch(`https://ai-inventory-server-4.onrender.com/downloads`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body:JSON.stringify({...model,downloadedBy:user.email})
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data);
-               toast.success("Download Successfully")
-            })
-            .catch((err) => {
-                console.log(err);
+    const handleDownload = async () => {   
+        try {
+            const token = await user.getIdToken(true);  
+
+            const res = await fetch(`${BASE_URL}/downloads`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,  
+                },
+                body: JSON.stringify({ ...model, downloadedBy: user.email })
             });
-    }
+
+            const data = await res.json();
+            console.log(data);
+            
+
+            if (!res.ok) {
+                toast.error("Download failed!");
+                return;
+            }
+
+            toast.success("Downloaded Successfully!");
+
+        } catch (err) {
+            toast.error("Download failed!");
+            console.error(err);
+        }
+    };
 
     if (loading) {
-        return <div className="">Loading</div>
+        return <div>Loading...</div>;
     }
 
     return (
         <div>
-
             <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
                 <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
                     <div className="flex flex-col md:flex-row gap-8 p-6 md:p-8">
+
                         <div className="shrink-0 w-full md:w-1/2">
                             <img
                                 src={model.image}
-                                alt=""
+                                alt={model.name}
                                 className="w-full object-cover rounded-xl shadow-md"
                             />
                         </div>
@@ -123,7 +142,6 @@ const ModelDetails = () => {
                                 <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                                     {model.framework}
                                 </div>
-
                                 <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                                     Downloaded: {model.purchased}
                                 </div>
@@ -137,20 +155,20 @@ const ModelDetails = () => {
                                 <Link
                                     to={`/update-model/${model._id}`}
                                     className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
-                                     text-white border-0 hover:from-pink-600 hover:to-red-700"
+                                    text-white border-0 hover:from-pink-600 hover:to-red-700"
                                 >
                                     Update Model
                                 </Link>
                                 <button
                                     onClick={handleDownload}
-                                    className="btn bg-linear-to-r from-[#14B8A6] to-[#6366F1] rounded-full"
+                                    className="btn rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]"
                                 >
                                     Download
                                 </button>
                                 <button
                                     onClick={handleDelete}
                                     className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
-                                     text-white border-0 hover:from-pink-600 hover:to-red-700"
+                                    text-white border-0 hover:from-pink-600 hover:to-red-700"
                                 >
                                     Delete
                                 </button>
