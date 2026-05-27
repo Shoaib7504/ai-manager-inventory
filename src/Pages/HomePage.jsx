@@ -11,11 +11,25 @@ const HomePage = () => {
     const [models, setModels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [slowConnection, setSlowConnection] = useState(false);
     const BASE_URL = "https://ai-inventory-server-4.onrender.com";
+
     useEffect(() => {
         const fetchModels = async () => {
+            const slowTimer = setTimeout(() => setSlowConnection(true), 4000);
+
             try {
-                const res = await fetch(`${BASE_URL}/models`);
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 35000); // 35s timeout
+
+                const res = await fetch(`${BASE_URL}/models`, {
+                    signal: controller.signal,
+                });
+
+                clearTimeout(timeoutId);
+                clearTimeout(slowTimer);
+                setSlowConnection(false);
+
                 const data = await res.json();
 
                 if (!res.ok) {
@@ -27,7 +41,12 @@ const HomePage = () => {
                 setModels(data.slice(0, 8));
                 setLoading(false);
             } catch (err) {
-                setError(err.message);
+                clearTimeout(slowTimer);
+                if (err.name === 'AbortError') {
+                    setError("Server took too long to respond. Please refresh the page.");
+                } else {
+                    setError(err.message);
+                }
             } finally {
                 setLoading(false);
             }
@@ -36,12 +55,32 @@ const HomePage = () => {
         fetchModels();
     }, []);
 
-    if (loading) return <LoadingSpinner />;
+    if (loading) return (
+        <div className='flex flex-col items-center justify-center min-h-[60vh] gap-3'>
+            <LoadingSpinner />
+            {slowConnection && (
+                <div className='text-center mt-4 space-y-1'>
+                    <p className='text-teal-500 text-sm font-medium'>
+                        Server is waking up, please wait...
+                    </p>
+                    <p className='text-gray-500 text-xs'>
+                        This can take up to 30 seconds on first load.
+                    </p>
+                </div>
+            )}
+        </div>
+    );
 
     if (error) return (
         <div className='flex flex-col items-center justify-center min-h-[60vh] gap-3'>
             <p className='text-red-400 text-lg font-medium'>Something went wrong</p>
             <p className='text-gray-500 text-sm'>{error}</p>
+            <button
+                onClick={() => window.location.reload()}
+                className='mt-2 px-6 py-2 bg-teal-600 text-white rounded-xl text-sm hover:bg-teal-700 transition'
+            >
+                Try Again
+            </button>
         </div>
     );
 

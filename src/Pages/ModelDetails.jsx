@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { AuthContext } from '../Context/AuthProvider';
 import toast from 'react-hot-toast';
 
-const BASE_URL = "https://ai-inventory-server-4.onrender.com";
+const BASE_URL = "https://ai-inventory-server-3.onrender.com";
 
 const ModelDetails = () => {
     const { user } = use(AuthContext);

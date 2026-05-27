@@ -22,9 +22,8 @@ const UpdateModel = () => {
         };
 
         try {
-            const token = await user.getIdToken(true); // ✅ force-refresh token from context user
-
-            const res = await fetch(`https://ai-inventory-server-5.onrender.com/models/${model._id}`, {
+            const token = await user.getIdToken(true); 
+            const res = await fetch(`https://ai-inventory-server-3.onrender.com/models/${model._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

@@ -8,7 +8,7 @@ const MyModels = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`https://ai-inventory-server-5.onrender.com/my-models?email=${user.email}`, {
+        fetch(`https://ai-inventory-server-3.onrender.com/my-models?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },

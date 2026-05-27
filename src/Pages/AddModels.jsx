@@ -24,7 +24,7 @@ const AddModels = () => {
                 createdAt: new Date(),
                 purchased: '0'
             }
-            const res = await fetch('https://ai-inventory-server-5.onrender.com/models', {
+            const res = await fetch('https://ai-inventory-server-3.onrender.com/models', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

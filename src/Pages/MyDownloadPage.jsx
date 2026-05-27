@@ -15,7 +15,7 @@ const MyDownloadPage = () => {
                 const token = await user.getIdToken(true) 
 
                 const res = await fetch(
-                    `https://ai-inventory-server-5.onrender.com/my-downloads`,
+                    `https://ai-inventory-server-3.onrender.com/my-downloads`,
                     {
                         headers: {
                             authorization: `Bearer ${token}`, 
