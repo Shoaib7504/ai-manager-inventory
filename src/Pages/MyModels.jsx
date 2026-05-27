@@ -8,7 +8,7 @@ const MyModels = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`https://ai-inventory-server-4.onrender.com/my-models?email=${user.email}`, {
+        fetch(`https://ai-inventory-server-5.onrender.com/my-models?email=${user.email}`, {
             headers: {
                 authorization: `Bearer ${user.accessToken}`,
             },
@@ -29,19 +29,17 @@ const MyModels = () => {
     }
 
     return (
-        <div>
-            <div className='w-11/12 mx-auto'>
-                <h1 className='text-5xl justify-center text-center font-bold
-                    bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent'>
-                    My All Created Model
-                </h1>
-                <p className='text-center text-gray-500 justify-center py-2'>
-                    Orchestrate and monitor your distributed neural networks. Managed <br />
-                    high-performance inference at scale
-                </p>
-                <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mt-5">
-                    {models.map(model => <ModelCard key={model._id} model={model} />)}
-                </div>
+        <div className='w-11/12 mx-auto px-2 sm:px-0'>
+            <h1 className='text-3xl sm:text-4xl lg:text-5xl justify-center text-center font-bold bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent'>
+                My All Created Model
+            </h1>
+            <p className='text-center text-gray-500 justify-center py-2 text-sm sm:text-base px-4'>
+                Orchestrate and monitor your distributed neural networks. Managed{' '}
+                <br className='hidden sm:block' />
+                high-performance inference at scale
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mt-5">
+                {models.map(model => <ModelCard key={model._id} model={model} />)}
             </div>
         </div>
     );

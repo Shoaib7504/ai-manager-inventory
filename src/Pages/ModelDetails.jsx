@@ -120,59 +120,58 @@ const ModelDetails = () => {
     }
 
     return (
-        <div>
-            <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
-                <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
-                    <div className="flex flex-col md:flex-row gap-8 p-6 md:p-8">
-
-                        <div className="shrink-0 w-full md:w-1/2">
-                            <img
-                                src={model.image}
-                                alt={model.name}
-                                className="w-full object-cover rounded-xl shadow-md"
-                            />
+       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+            <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 p-4 sm:p-6 md:p-8">
+ 
+                    {/* Image */}
+                    <div className="w-full md:w-1/2 shrink-0">
+                        <img
+                            src={model.image}
+                            alt={model.name}
+                            className="w-full object-cover rounded-xl shadow-md max-h-72 sm:max-h-96 md:max-h-full"
+                        />
+                    </div>
+ 
+                    {/* Details */}
+                    <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+                            {model.name}
+                        </h1>
+ 
+                        <div className="flex flex-wrap gap-3">
+                            <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+                                {model.framework}
+                            </div>
+                            <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
+                                Downloaded: {model.purchased}
+                            </div>
                         </div>
-
-                        <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
-                            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-                                {model.name}
-                            </h1>
-
-                            <div className="flex gap-3">
-                                <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
-                                    {model.framework}
-                                </div>
-                                <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
-                                    Downloaded: {model.purchased}
-                                </div>
-                            </div>
-
-                            <p className="text-gray-600 leading-relaxed text-base md:text-lg">
-                                {model.description}
-                            </p>
-
-                            <div className="flex gap-3 mt-6">
-                                <Link
-                                    to={`/update-model/${model._id}`}
-                                    className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
-                                    text-white border-0 hover:from-pink-600 hover:to-red-700"
-                                >
-                                    Update Model
-                                </Link>
-                                <button
-                                    onClick={handleDownload}
-                                    className="btn rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]"
-                                >
-                                    Download
-                                </button>
-                                <button
-                                    onClick={handleDelete}
-                                    className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1]
-                                    text-white border-0 hover:from-pink-600 hover:to-red-700"
-                                >
-                                    Delete
-                                </button>
-                            </div>
+ 
+                        <p className="text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
+                            {model.description}
+                        </p>
+ 
+                        {/* Action buttons — stack on mobile, row on sm+ */}
+                        <div className="flex flex-col sm:flex-row flex-wrap gap-3 mt-4 sm:mt-6">
+                            <Link
+                                to={`/update-model/${model._id}`}
+                                className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-white border-0 hover:from-pink-600 hover:to-red-700 text-sm sm:text-base w-full sm:w-auto text-center"
+                            >
+                                Update Model
+                            </Link>
+                            <button
+                                onClick={handleDownload}
+                                className="btn rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-sm sm:text-base w-full sm:w-auto"
+                            >
+                                Download
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="btn btn-primary rounded-full bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-white border-0 hover:from-pink-600 hover:to-red-700 text-sm sm:text-base w-full sm:w-auto"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 </div>

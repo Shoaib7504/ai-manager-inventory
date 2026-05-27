@@ -21,12 +21,12 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 Component: HomePage,
-                loader: () => fetch('https://ai-inventory-server-4.onrender.com/models')
+               
             },
             {
                 path: "/all-models",
                 Component: AllModels,
-                loader: () => fetch('https://ai-inventory-server-4.onrender.com/models')
+                loader: () => fetch('https://ai-inventory-server-5.onrender.com/models')
             },
             {
                 path: "/add-models",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <UpdateModel></UpdateModel>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://ai-inventory-server-4.onrender.com/models/${params.id}`)
+                loader: ({ params }) => fetch(`https://ai-inventory-server-5.onrender.com/models/${params.id}`)
             },
             {
                 path:"/my-downloads",
