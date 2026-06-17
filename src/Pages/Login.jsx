@@ -1,7 +1,7 @@
 import React, { use, useState } from 'react';
 import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router';
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
@@ -62,28 +62,26 @@ const Login = () => {
     }
 
     return (
-
-
-        <div className='flex flex-col md:px-70 lg:flex-row min-h-screen'>
+        <div className='flex flex-col md:px-70 lg:flex-row min-h-screen bg-base-200 text-base-content transition-colors duration-200'>
             {/* Left hero text */}
             <div className='lg:flex-1 flex flex-col justify-center px-6 sm:px-10 lg:pl-20 py-10 lg:py-0'>
-                <p className='text-blue-600 font-medium text-sm sm:text-base mb-2'>SECURE GATEWAY</p>
+                <p className='text-teal-500 font-medium text-sm sm:text-base mb-2 font-semibold tracking-wider'>SECURE GATEWAY</p>
                 <h1 className='font-bold text-3xl sm:text-4xl lg:text-5xl'>Login to</h1>
                 <h1 className='font-bold text-3xl sm:text-4xl lg:text-5xl text-teal-600 mt-2 sm:mt-3'>AI Model Inventory</h1>
                 <h1 className='font-bold text-3xl sm:text-4xl lg:text-5xl mt-2 sm:mt-3 bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent'>
                     Manager
                 </h1>
-                <p className='mt-3 text-gray-400 text-sm sm:text-base leading-relaxed max-w-sm'>
+                <p className='mt-3 text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed max-w-sm'>
                     Access the central hub for the synthetic observer ecosystem. Manage, curate, and deploy your neural assets from a single secure terminal.
                 </p>
             </div>
 
             {/* Right form */}
             <div className='w-full lg:w-125 mx-auto px-4 sm:px-0 pb-10 lg:pb-0 lg:flex lg:items-center'>
-                <div className='w-full rounded-2xl p-6 sm:p-10 shadow-2xl'>
+                <div className='w-full rounded-2xl p-6 sm:p-10 shadow-2xl bg-base-100 border border-base-200'>
                     <div className="mb-6 sm:mb-8">
-                        <h2 className="text-xl sm:text-2xl text-black mb-2">Welcome Back</h2>
-                        <p className="text-gray-400 text-sm">
+                        <h2 className="text-xl sm:text-2xl font-bold mb-2 text-base-content">Welcome Back</h2>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm">
                             Enter your credentials to manage your inventory.
                         </p>
                     </div>
@@ -91,7 +89,7 @@ const Login = () => {
                     <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                         {/* Email */}
                         <div>
-                            <label className="block text-gray-400 text-xs uppercase tracking-wider mb-3">
+                            <label className="block text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider mb-3">
                                 Email Address
                             </label>
                             <div className="relative">
@@ -100,7 +98,7 @@ const Login = () => {
                                     type="email"
                                     name="email"
                                     placeholder="name@company.ai"
-                                    className="w-full bg-[#0f1729] border border-gray-700 rounded-lg pl-12 pr-4 py-3 sm:py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                                    className="w-full bg-base-200 border border-base-300 rounded-lg pl-12 pr-4 py-3 sm:py-3.5 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors"
                                 />
                             </div>
                         </div>
@@ -108,10 +106,10 @@ const Login = () => {
                         {/* Password */}
                         <div>
                             <div className="flex justify-between items-center mb-3">
-                                <label className="text-gray-400 text-xs uppercase tracking-wider">
+                                <label className="text-gray-500 dark:text-gray-400 text-xs uppercase tracking-wider">
                                     Password
                                 </label>
-                                <button type="button" className="text-cyan-400 text-xs hover:text-cyan-300 transition-colors">
+                                <button type="button" className="text-teal-500 text-xs hover:text-teal-400 transition-colors">
                                     Forgot Password?
                                 </button>
                             </div>
@@ -121,7 +119,7 @@ const Login = () => {
                                     type={showPassword ? "text" : "password"}
                                     name='password'
                                     placeholder="••••••••"
-                                    className="w-full bg-[#0f1729] border border-gray-700 rounded-lg pl-12 pr-12 py-3 sm:py-3.5 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 transition-colors"
+                                    className="w-full bg-base-200 border border-base-300 rounded-lg pl-12 pr-12 py-3 sm:py-3.5 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors"
                                 />
                                 <button
                                     type="button"
@@ -135,7 +133,7 @@ const Login = () => {
 
                         <button
                             type="submit"
-                            className="w-full font-medium bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-black py-3 sm:py-3.5 rounded-lg shadow-lg shadow-purple-500/20 text-sm sm:text-base"
+                            className="w-full font-semibold bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-white py-3 sm:py-3.5 rounded-lg shadow-lg text-sm sm:text-base cursor-pointer hover:scale-[1.01] transition-transform"
                         >
                             Sign In to Dashboard
                         </button>
@@ -143,17 +141,17 @@ const Login = () => {
 
                     <div className="relative my-6 sm:my-8">
                         <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-gray-700"></div>
+                            <div className="w-full border-t border-base-300"></div>
                         </div>
                         <div className="relative flex justify-center text-xs uppercase">
-                            <span className="bg-white px-4 text-gray-500 tracking-wider">or continue with</span>
+                            <span className="bg-base-100 px-4 text-gray-500 tracking-wider">or continue with</span>
                         </div>
                     </div>
 
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        className="w-full bg-[#0f1729] cursor-pointer border border-gray-700 hover:border-gray-600 text-white py-3 sm:py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base"
+                        className="w-full bg-base-200 cursor-pointer border border-base-300 hover:bg-base-300 text-base-content py-3 sm:py-3.5 rounded-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-medium"
                     >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                             <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4" />
@@ -164,17 +162,15 @@ const Login = () => {
                         Sign in with Google
                     </button>
 
-                    <p className="text-center text-gray-400 text-sm mt-6">
+                    <p className="text-center text-gray-500 dark:text-gray-400 text-sm mt-6">
                         Don't have an account?{" "}
-                        <Link to='/auth/register' className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Link to='/auth/register' className="text-teal-500 hover:text-teal-400 transition-colors font-medium">
                             Request Access
                         </Link>
                     </p>
                 </div>
             </div>
         </div>
-
-
     );
 };
 

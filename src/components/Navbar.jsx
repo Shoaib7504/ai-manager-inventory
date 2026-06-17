@@ -1,13 +1,26 @@
-import React, { use, useState } from 'react';
+import React, { use, useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router';
-import { AuthContext } from '../Context/AuthProvider';
-import { FaUser } from 'react-icons/fa';
+import { AuthContext } from '../Context/AuthContext';
+import { FaUser, FaSun, FaMoon } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
 import { IoLogIn, IoLogOut, IoMenu, IoClose } from 'react-icons/io5';
 
 const Navbar = () => {
     const { user, Logout } = use(AuthContext);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
+
+    const toggleTheme = () => {
+        const nextTheme = theme === 'light' ? 'dark' : 'light';
+        setTheme(nextTheme);
+        localStorage.setItem('theme', nextTheme);
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        if (nextTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    };
 
     const navLinkClass = ({ isActive }) =>
         `transition-colors hover:text-teal-500 ${isActive ? 'text-teal-500 font-bold' : ''}`;
@@ -27,8 +40,21 @@ const Navbar = () => {
                 <NavLink to="/add-models" className={navLinkClass}>Add Models</NavLink>
             </div>
 
-            {/* Right side: avatar or login + hamburger */}
-            <div className="flex items-center gap-3">
+            {/* Right side: theme toggle + avatar or login + hamburger */}
+            <div className="flex items-center gap-2 sm:gap-3">
+
+                {/* Theme Toggle Button */}
+                <button
+                    onClick={toggleTheme}
+                    className="btn btn-ghost btn-circle text-lg sm:text-xl"
+                    aria-label="Toggle Theme"
+                >
+                    {theme === 'light' ? (
+                        <FaMoon className="text-slate-700 hover:text-indigo-600 transition-colors" />
+                    ) : (
+                        <FaSun className="text-yellow-400 hover:text-yellow-500 transition-colors" />
+                    )}
+                </button>
 
                 {/* Avatar dropdown — always visible when logged in */}
                 {user ? (
@@ -84,7 +110,7 @@ const Navbar = () => {
 
                 {/* Hamburger — mobile only */}
                 <button
-                    className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition"
+                    className="md:hidden p-2 rounded-lg hover:bg-base-200 transition"
                     onClick={() => setMenuOpen(!menuOpen)}
                     aria-label="Toggle menu"
                 >
@@ -94,7 +120,7 @@ const Navbar = () => {
 
             {/* Mobile dropdown menu */}
             {menuOpen && (
-                <div className="absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 md:hidden flex flex-col px-6 py-4 gap-4 text-base font-semibold z-50">
+                <div className="absolute top-full left-0 w-full bg-base-100 shadow-lg border-t border-base-200 md:hidden flex flex-col px-6 py-4 gap-4 text-base font-semibold z-50 text-base-content">
                     <NavLink
                         to="/"
                         className={navLinkClass}

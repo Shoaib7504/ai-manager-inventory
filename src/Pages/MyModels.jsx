@@ -1,6 +1,6 @@
 import React, { use, useEffect, useState } from 'react';
 import ModelCard from '../components/ModelCard';
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 
 const MyModels = () => {
     const { user } = use(AuthContext);
@@ -8,21 +8,27 @@ const MyModels = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch(`https://ai-inventory-server-3.onrender.com/my-models?email=${user.email}`, {
-            headers: {
-                authorization: `Bearer ${user.accessToken}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                setLoading(false);
+        if (!user || !user.email) return;
+
+        const fetchModels = async () => {
+            try {
+                const token = await user.getIdToken(true);
+                const res = await fetch(`https://ai-inventory-server-one.vercel.app/my-models?email=${user.email}`, {
+                    headers: {
+                        authorization: `Bearer ${token}`,
+                    },
+                });
+                const data = await res.json();
                 setModels(data);
-            })
-            .catch(err => {
-                setLoading(false); 
+                setLoading(false);
+            } catch (err) {
+                setLoading(false);
                 console.error("Failed to fetch models:", err);
-            });
-    }, [user.email]);
+            }
+        };
+
+        fetchModels();
+    }, [user]);
 
     if (loading) {
         return <div>Please wait... data is loading</div>;

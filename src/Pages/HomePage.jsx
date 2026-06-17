@@ -12,7 +12,7 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [slowConnection, setSlowConnection] = useState(false);
-    const BASE_URL = "https://ai-inventory-server-4.onrender.com";
+    const BASE_URL = "https://ai-inventory-server-one.vercel.app";
 
     useEffect(() => {
         const fetchModels = async () => {

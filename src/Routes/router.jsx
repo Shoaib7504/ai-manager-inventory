@@ -26,7 +26,7 @@ const router = createBrowserRouter([
             {
                 path: "/all-models",
                 Component: AllModels,
-                loader: () => fetch('https://ai-inventory-server-3.onrender.com/models')
+                loader: () => fetch('https://ai-inventory-server-one.vercel.app/models')
             },
             {
                 path: "/add-models",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute>
                     <UpdateModel></UpdateModel>
                 </PrivateRoute>,
-                loader: ({ params }) => fetch(`https://ai-inventory-server-3.onrender.com/models/${params.id}`)
+                loader: ({ params }) => fetch(`https://ai-inventory-server-one.vercel.app/models/${params.id}`)
             },
             {
                 path:"/my-downloads",

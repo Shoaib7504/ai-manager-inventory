@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
+@variant dark (&:where(.dark, .dark *));
 
 .primary-gradient {
   background: linear-gradient(135deg, #7c3aed 0%, #d2bbff 100%);
@@ -11,6 +11,11 @@
   border: 2px solid transparent;
   border-radius: 16px;
   background: linear-gradient(#fbfbfc, #f3f3f5) padding-box,
+    linear-gradient(to right, cyan, purple) border-box;
+}
+
+html[data-theme="dark"] .gradient-border {
+  background: linear-gradient(#1e293b, #0f172a) padding-box,
     linear-gradient(to right, cyan, purple) border-box;
 }
 

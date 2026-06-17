@@ -1,7 +1,7 @@
 import { Eye, EyeOff, ImageIcon, Lock, Mail, User } from 'lucide-react';
 import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
@@ -66,73 +66,73 @@ const Register = () => {
 
     const currentYear = new Date().getFullYear();
     return (
-          <div className="min-h-screen flex items-center justify-center p-4">
-            <div className="w-full max-w-sm sm:max-w-md p-6 sm:p-10 shadow-2xl rounded-2xl">
+        <div className="min-h-screen bg-base-200 text-base-content flex items-center justify-center p-4 transition-colors duration-200">
+            <div className="w-full max-w-sm sm:max-w-md p-6 sm:p-10 shadow-2xl rounded-2xl bg-base-100 border border-base-200">
                 <div className="text-center mb-6 sm:mb-8">
                     <div className="inline-flex items-center justify-center w-12 h-12 bg-teal-500/20 rounded-lg mb-4">
                         <div className="w-6 h-6 bg-teal-400 rounded" style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}></div>
                     </div>
                     <h1 className="text-xl sm:text-2xl mb-2">
-                        <span className="text-gray-600">Register for </span>
+                        <span className="text-gray-500 dark:text-gray-400">Register for </span>
                         <span className="bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent">
                             AI Model Inventory Manager
                         </span>
                     </h1>
-                    <p className="text-gray-400 text-sm">
-                        Initialize your custom profile to achieve something synthetic convergence
+                    <p className="text-gray-500 dark:text-gray-400 text-sm">
+                        Initialize your custom profile to achieve synthetic convergence
                     </p>
                 </div>
  
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {/* Full Name */}
                     <div>
-                        <label htmlFor="fullName" className="block text-gray-500 text-sm mb-2">Full Name</label>
+                        <label htmlFor="fullName" className="block text-gray-500 dark:text-gray-400 text-sm mb-2 font-medium">Full Name</label>
                         <div className="relative">
                             <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                             <input
                                 type="text" id="fullName" name="fullName"
                                 placeholder="Enter your full name" required
-                                className="w-full bg-[#e7edf3] border border-gray-700 rounded-lg px-10 py-3 text-black placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-base-200 border border-base-300 rounded-lg px-10 py-3 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors"
                             />
                         </div>
                     </div>
  
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className="block text-gray-500 text-sm mb-2">Email Address</label>
+                        <label htmlFor="email" className="block text-gray-500 dark:text-gray-400 text-sm mb-2 font-medium">Email Address</label>
                         <div className="relative">
                             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                             <input
                                 type="email" id="email" name="email"
                                 placeholder="ai@example.info" required
-                                className="w-full bg-[#0d1b2a] border border-gray-700 rounded-lg px-10 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-base-200 border border-base-300 rounded-lg px-10 py-3 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors"
                             />
                         </div>
                     </div>
  
                     {/* Photo URL */}
                     <div>
-                        <label htmlFor="photoUrl" className="block text-gray-500 text-sm mb-2">Photo URL (Optional)</label>
+                        <label htmlFor="photoUrl" className="block text-gray-500 dark:text-gray-400 text-sm mb-2 font-medium">Photo URL (Optional)</label>
                         <div className="relative">
                             <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                             <input
                                 type="url" id="photoUrl" name="photoUrl"
                                 placeholder="https://your-avatar-link.com/me.jpg"
-                                className="w-full bg-[#e7edf3] border border-gray-700 rounded-lg px-10 py-3 text-black placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-colors"
+                                className="w-full bg-base-200 border border-base-300 rounded-lg px-10 py-3 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors"
                             />
                         </div>
                     </div>
  
                     {/* Password */}
                     <div>
-                        <label htmlFor="password" className="block text-gray-500 text-sm mb-2">Password</label>
+                        <label htmlFor="password" className="block text-gray-500 dark:text-gray-400 text-sm mb-2 font-medium">Password</label>
                         <div className="relative">
                             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                             <input
                                 type={showPassword ? "text" : "password"}
                                 id="password" name="password"
                                 placeholder="Create a secure password" required
-                                className="w-full bg-[#0d1b2a] border border-gray-700 rounded-lg px-10 py-3 text-gray-200 placeholder-gray-600 focus:outline-none focus:border-cyan-500 transition-colors pr-10"
+                                className="w-full bg-base-200 border border-base-300 rounded-lg px-10 py-3 text-base-content placeholder-gray-500 focus:outline-none focus:border-teal-500 transition-colors pr-10"
                             />
                             <button
                                 type="button"
@@ -146,7 +146,7 @@ const Register = () => {
  
                     <button
                         type="submit"
-                        className="w-full cursor-pointer bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-gray-900 py-3 rounded-lg font-medium transition-colors mt-4 text-sm sm:text-base"
+                        className="w-full cursor-pointer bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-white py-3 rounded-lg font-semibold transition-transform hover:scale-[1.01] mt-4 text-sm sm:text-base shadow-lg"
                     >
                         CREATE ACCOUNT
                     </button>
@@ -156,7 +156,7 @@ const Register = () => {
                     <button
                         type="button"
                         onClick={handleGoogleLogin}
-                        className="w-full bg-[#0f1729] border cursor-pointer border-gray-700 hover:border-gray-600 text-white py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base"
+                        className="w-full bg-base-200 border cursor-pointer border-base-300 hover:bg-base-300 text-base-content py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-medium"
                     >
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                             <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4" />
@@ -169,7 +169,7 @@ const Register = () => {
  
                     <div className="text-center text-sm">
                         <span className="text-gray-500">Already have an account? </span>
-                        <Link to="/auth/login" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Link to="/auth/login" className="text-teal-500 hover:text-teal-400 transition-colors font-medium">
                             Login here
                         </Link>
                     </div>
@@ -183,7 +183,7 @@ const Register = () => {
                     </p>
                 </div>
  
-                <div className="mt-4 sm:mt-6 text-center text-xs text-gray-600">
+                <div className="mt-4 sm:mt-6 text-center text-xs text-gray-500">
                     <p>Synthetic Observer</p>
                     <p className="mt-1">© {currentYear} - AI Model Inventory Manager v2.1.0</p>
                 </div>

@@ -1,10 +1,10 @@
 import React, { use, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import Swal from 'sweetalert2';
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 import toast from 'react-hot-toast';
 
-const BASE_URL = "https://ai-inventory-server-3.onrender.com";
+const BASE_URL = "https://ai-inventory-server-one.vercel.app";
 
 const ModelDetails = () => {
     const { user } = use(AuthContext);
@@ -14,6 +14,7 @@ const ModelDetails = () => {
     const { id } = useParams();
 
     useEffect(() => {
+        if (!user) return;
         const fetchModel = async () => {
             try {
                 const token = await user.getIdToken(true);
@@ -39,7 +40,7 @@ const ModelDetails = () => {
         };
 
         fetchModel();
-    }, [id]);
+    }, [id, user]);
 
     const handleDelete = () => {
         Swal.fire({
@@ -135,7 +136,7 @@ const ModelDetails = () => {
  
                     {/* Details */}
                     <div className="flex flex-col justify-center space-y-4 w-full md:w-1/2">
-                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800">
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
                             {model.name}
                         </h1>
  
@@ -148,7 +149,7 @@ const ModelDetails = () => {
                             </div>
                         </div>
  
-                        <p className="text-gray-600 leading-relaxed text-sm sm:text-base md:text-lg">
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base md:text-lg">
                             {model.description}
                         </p>
  

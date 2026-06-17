@@ -1,7 +1,7 @@
 import { AlertCircle, ChevronRight } from 'lucide-react';
 import React, { use } from 'react';
 import Image from '../assets/alexandra_koch-ai-7977960.jpg'
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 
@@ -24,7 +24,7 @@ const AddModels = () => {
                 createdAt: new Date(),
                 purchased: '0'
             }
-            const res = await fetch('https://ai-inventory-server-3.onrender.com/models', {
+            const res = await fetch('https://ai-inventory-server-one.vercel.app/models', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,7 +46,7 @@ const AddModels = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#F9FAFB] text-white">
+        <div className="min-h-screen bg-base-200 text-base-content transition-colors duration-200">
             <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 
@@ -56,16 +56,16 @@ const AddModels = () => {
                             <p className="text-xs text-gray-500 uppercase tracking-wider mb-4">
                                 Curator Terminal
                             </p>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-black font-bold mb-4 sm:mb-6">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                                 Expand the{' '}
                                 <span className="bg-linear-to-r from-[#14B8A6] to-[#6366F1] bg-clip-text text-transparent">
                                     intelligence.
                                 </span>
                             </h2>
-                            <p className="text-gray-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md">
+                            <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8 max-w-md">
                                 Onboard new neural architectures into the Observer inventory. Ensure metadata precision for optimal lifecycle tracking and deployment efficiency.
                             </p>
-                            <button className="flex items-center gap-2 text-base sm:text-lg text-teal-400 hover:text-cyan-300 transition-colors">
+                            <button className="flex items-center gap-2 text-base sm:text-lg text-teal-500 hover:text-cyan-400 transition-colors">
                                 <ChevronRight className="w-4 h-4" />
                                 <span>Synthetic validation active</span>
                             </button>
@@ -73,14 +73,14 @@ const AddModels = () => {
 
                         {/* Image — hidden on mobile to save space */}
                         <div className="relative hidden sm:block">
-                            <div className="bg-[#0d1220] border border-gray-800 rounded-lg overflow-hidden">
+                            <div className="bg-base-100 border border-base-300 rounded-lg overflow-hidden">
                                 <img
                                     src={Image}
                                     alt="Neural network visualization"
                                     className="w-full h-auto"
                                 />
-                                <div className="p-4">
-                                    <p className="text-xs text-gray-600">NEURAL VX_NET-2026</p>
+                                <div className="p-4 bg-base-100">
+                                    <p className="text-xs text-gray-500">NEURAL VX_NET-2026</p>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +92,7 @@ const AddModels = () => {
 
                             {/* Model Name */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Model Name
                                 </label>
                                 <input
@@ -100,20 +100,20 @@ const AddModels = () => {
                                     placeholder="Ex. ChatGPT-4.0"
                                     name='name'
                                     required
-                                    className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                    className="input input-bordered mt-1 bg-base-100 text-base-content border-base-300 w-full py-3 rounded-xl focus:border-teal-500"
                                 />
                             </div>
 
                             {/* Framework */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Framework
                                 </label>
                                 <select
                                     defaultValue="Pick a Framework"
                                     name='framework'
                                     required
-                                    className="select select-info w-full mt-1 py-3 rounded-xl bg-gray-300"
+                                    className="select select-bordered w-full mt-1 bg-base-100 text-base-content border-base-300 rounded-xl focus:border-teal-500"
                                 >
                                     <option disabled>Pick a Framework</option>
                                     <option>React</option>
@@ -124,7 +124,7 @@ const AddModels = () => {
 
                             {/* Primary Use Case */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Primary Use Case
                                 </label>
                                 <input
@@ -132,13 +132,13 @@ const AddModels = () => {
                                     placeholder="Define the operational intent..."
                                     name='useCase'
                                     required
-                                    className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                    className="input input-bordered mt-1 bg-base-100 text-base-content border-base-300 w-full py-3 rounded-xl focus:border-teal-500"
                                 />
                             </div>
 
                             {/* Dataset URL */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Dataset URL
                                 </label>
                                 <div className="relative">
@@ -146,7 +146,7 @@ const AddModels = () => {
                                         type="text"
                                         name='dataset'
                                         required
-                                        className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                        className="input input-bordered mt-1 bg-base-100 text-base-content border-base-300 w-full py-3 rounded-xl focus:border-teal-500 pr-10"
                                     />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
                                         <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
@@ -156,7 +156,7 @@ const AddModels = () => {
 
                             {/* Image URL */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Image URL
                                 </label>
                                 <div className="relative">
@@ -165,7 +165,7 @@ const AddModels = () => {
                                         placeholder='Image Url'
                                         name='image'
                                         required
-                                        className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                        className="input input-bordered mt-1 bg-base-100 text-base-content border-base-300 w-full py-3 rounded-xl focus:border-teal-500 pr-10"
                                     />
                                     <div className="absolute right-3 top-1/2 -translate-y-1/2">
                                         <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
@@ -175,7 +175,7 @@ const AddModels = () => {
 
                             {/* Brief Description */}
                             <div className="flex flex-col gap-y-1">
-                                <label className="text-base sm:text-lg text-black font-medium tracking-wider">
+                                <label className="text-base sm:text-lg font-medium tracking-wider text-base-content">
                                     Brief Description
                                 </label>
                                 <textarea
@@ -183,7 +183,7 @@ const AddModels = () => {
                                     required
                                     rows={4}
                                     name='description'
-                                    className="bg-[#e7edf3] border mt-1 border-gray-400 px-3 rounded-xl text-black w-full py-3 placeholder:text-gray-600"
+                                    className="textarea textarea-bordered mt-1 bg-base-100 text-base-content border-base-300 w-full py-3 rounded-xl focus:border-teal-500"
                                 />
                             </div>
 
@@ -195,7 +195,7 @@ const AddModels = () => {
                                         <p className="text-sm text-red-400 font-medium mb-1">
                                             CONFIGURATION WARNING
                                         </p>
-                                        <p className="text-xs text-gray-400 leading-relaxed">
+                                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                                             Ensure the Framework matches the expected node weights. Mismatches will trigger automated rejection in the exit protocol.
                                         </p>
                                     </div>
@@ -204,8 +204,8 @@ const AddModels = () => {
 
                             {/* Timestamp Checkbox */}
                             <div className="flex items-center gap-3">
-                                <input type="checkbox" defaultChecked className="checkbox" />
-                                <label className="text-xs text-gray-400 uppercase tracking-wider">
+                                <input type="checkbox" defaultChecked className="checkbox checkbox-teal" />
+                                <label className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                                     SYSTEM TIMESTAMP STAMP
                                 </label>
                             </div>
@@ -213,7 +213,7 @@ const AddModels = () => {
                             {/* Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full flex justify-center items-center text-center bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-black font-medium py-4 sm:py-6 rounded-lg transition-colors text-sm sm:text-base"
+                                className="w-full flex justify-center items-center text-center bg-linear-to-r from-[#14B8A6] to-[#6366F1] text-white font-semibold py-4 rounded-xl transition-transform hover:scale-[1.01] active:scale-[0.99] text-sm sm:text-base shadow-lg cursor-pointer"
                             >
                                 COMMIT MODEL
                                 <ChevronRight className="w-5 h-5 ml-2" />

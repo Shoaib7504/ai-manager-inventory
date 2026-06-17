@@ -20,11 +20,11 @@ const ModelCard = ({ model }) => {
 
             {/* Content */}
             <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
-                <p className="text-xs text-gray-600 uppercase tracking-widest">
+                <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-widest">
                     Transformer Model
                 </p>
 
-                <h2 className="text-base sm:text-xl text-black font-semibold line-clamp-1">{model.name}</h2>
+                <h2 className="text-base sm:text-xl text-gray-900 dark:text-white font-semibold line-clamp-1">{model.name}</h2>
 
                 <p className="text-xs sm:text-sm text-gray-400 line-clamp-2">
                     {model.description}

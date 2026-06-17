@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from 'react';
-import { AuthContext } from '../Context/AuthProvider';
+import { AuthContext } from '../Context/AuthContext';
 import ModelCard from '../components/ModelCard';
 
 const MyDownloadPage = () => {
@@ -15,7 +15,7 @@ const MyDownloadPage = () => {
                 const token = await user.getIdToken(true) 
 
                 const res = await fetch(
-                    `https://ai-inventory-server-3.onrender.com/my-downloads`,
+                    `https://ai-inventory-server-one.vercel.app/my-downloads`,
                     {
                         headers: {
                             authorization: `Bearer ${token}`, 
